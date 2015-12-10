@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Double sCnt = 0.0;
     private Double tCnt = 0.0;
     private Double sPercent = 0.0;
+    private Double gPercent = 0.0;
     private Double sgPercent = 0.0;
     private Double bPercent = 0.0;
 
@@ -32,14 +33,15 @@ public class MainActivity extends AppCompatActivity {
     private TextView mStrikePercent;
     private TextView mStrikeGoodPercent;
     private TextView mBallPercent;
+    private TextView mGoodPercent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-      //  setSupportActionBar(toolbar);
+        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //  setSupportActionBar(toolbar);
     }
 
     @Override
@@ -122,5 +124,9 @@ public class MainActivity extends AppCompatActivity {
         bPercent = (bCnt/tCnt) * 100;
         mBallPercent = (TextView) findViewById(R.id.ball_percent_value);
         mBallPercent.setText(String.format("%1$,.0f", bPercent));
+
+        gPercent = (gCnt/tCnt) * 100;
+        mGoodPercent = (TextView) findViewById(R.id.good_percent_value);
+        mGoodPercent.setText(String.format("%1$,.0f", gPercent));
     }
 }

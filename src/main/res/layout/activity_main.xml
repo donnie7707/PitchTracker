@@ -1,64 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context="com.dooleyapps.pitchcounter.MainActivity">
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:fitsSystemWindows="true"
+             android:orientation="vertical"
+             tools:context="com.dooleyapps.pitchcounter.MainActivity">
 
     <include layout="@layout/include_toolbar" android:id="@+id/toolbar_container"/>
 
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dip" >
+        android:padding="5dip" >
 
         <TextView android:id="@+id/strike_str"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-                  android:gravity="center_vertical|right"
-            android:hint="@string/strike_str" />
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:gravity="center"
+                  android:hint="@string/strike_str"
+                  android:layout_span="3"
+                  android:textStyle="bold"
+                  android:textSize="8pt" />
+    </TableRow>
 
-        <TextView android:id="@+id/strike_cnt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/strike_cnt"
-            android:layout_gravity="center"
-            android:padding="20dip"/>
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip" >
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/strike_sub"
-            android:layout_gravity="center"
+            android:layout_gravity="center|top"
             android:onClick="subStrike"/>
+
+        <TextView android:id="@+id/strike_cnt"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/strike_cnt"
+                  android:layout_gravity="center|top"
+                  android:padding="20dip"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/strike_add"
-            android:layout_gravity="center"
+            android:layout_gravity="center|top"
             android:onClick="addStrike"/>
     </TableRow>
 
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dip" >
-
+        android:padding="5dip" >
         <TextView android:id="@+id/good_ball_str"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-                  android:gravity="center_vertical|right"
-            android:hint="@string/good_ball_str"/>
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:gravity="center"
+                  android:hint="@string/good_ball_str"
+                  android:layout_span="3"
+                  android:textStyle="bold"
+                  android:textSize="8pt" />
+    </TableRow>
 
-        <TextView android:id="@+id/good_ball_cnt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/good_ball_cnt"
-            android:layout_gravity="center" />
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip" >
 
         <Button
             android:layout_width="wrap_content"
@@ -66,6 +77,12 @@
             android:text="@string/good_ball_sub"
             android:layout_gravity="center"
             android:onClick="subGood"/>
+
+        <TextView android:id="@+id/good_ball_cnt"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/good_ball_cnt"
+                  android:layout_gravity="center" />
 
         <Button
             android:layout_width="wrap_content"
@@ -78,19 +95,21 @@
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dip" >
-
+        android:padding="5dip" >
         <TextView android:id="@+id/bad_ball_str"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-                  android:gravity="center_vertical|right"
-            android:hint="@string/bad_ball_str" />
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:gravity="center"
+                  android:hint="@string/bad_ball_str"
+                  android:layout_span="3"
+                  android:textStyle="bold"
+                  android:textSize="8pt" />
 
-        <TextView android:id="@+id/bad_ball_cnt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/bad_ball_cnt"
-            android:layout_gravity="center" />
+    </TableRow>
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip" >
 
         <Button
             android:layout_width="wrap_content"
@@ -99,91 +118,121 @@
             android:layout_gravity="center"
             android:onClick="subBad"/>
 
+        <TextView android:id="@+id/bad_ball_cnt"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/bad_ball_cnt"
+                  android:layout_gravity="center" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bad_ball_add"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:onClick="addBad"/>
     </TableRow>
 
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:padding="10dip"
+        android:padding="5dip"
         android:background="@color/light_gray">
-
     </TableRow>
 
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip" >
+
+        <TextView android:id="@+id/strike_percent_str"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/strike_percent_str"
+                  android:layout_gravity="end"
+                  android:textStyle="bold"/>
+
+        <TextView android:id="@+id/strike_percent_value"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/strike_percent_value"
+                  android:paddingLeft="5dip"
+                  android:textStyle="bold" />
+
+        <TextView android:id="@+id/good_strike_percent_str"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/good_strike_percent_str"
+                  android:layout_gravity="end"
+                  android:textStyle="bold" />
+
+        <TextView android:id="@+id/good_strike_percent_value"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/good_strike_percent_value"
+                  android:paddingLeft="5dip"
+                  android:textStyle="bold"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip" >
+
+        <TextView android:id="@+id/ball_percent_str"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/ball_percent_str"
+                  android:layout_gravity="end"
+                  android:textStyle="bold"/>
+
+        <TextView android:id="@+id/ball_percent_value"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/ball_percent_value"
+                  android:paddingLeft="5dip"
+                  android:textStyle="bold" />
+
+        <TextView android:id="@+id/good_percent_str"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/good_percent_str"
+                  android:layout_gravity="end"
+                  android:textStyle="bold"/>
+
+        <TextView android:id="@+id/good_percent_value"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/good_percent_value"
+                  android:paddingLeft="5dip"
+                  android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:padding="5dip"
+        android:background="@color/light_gray">
+    </TableRow>
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dip" >
 
         <TextView android:id="@+id/total_cnt_str"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/total_cnt_str"
-            android:layout_gravity="right"/>
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/total_cnt_str"
+                  android:layout_gravity="end"
+                  android:textStyle="bold"
+                  android:layout_span="2"
+                  android:textSize="11pt"/>
 
         <TextView android:id="@+id/total_cnt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/total_cnt"
-            android:layout_gravity="center" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dip" >
-
-        <TextView android:id="@+id/strike_percent_str"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/strike_percent_str"
-            android:layout_gravity="right"/>
-
-        <TextView android:id="@+id/strike_percent_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/strike_percent_value"
-            android:layout_gravity="center" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dip" >
-
-        <TextView android:id="@+id/good_strike_percent_str"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/good_strike_percent_str"
-            android:layout_gravity="right"/>
-
-        <TextView android:id="@+id/good_strike_percent_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/good_strike_percent_value"
-            android:layout_gravity="center" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dip" >
-
-        <TextView android:id="@+id/ball_percent_str"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:hint="@string/ball_percent_str"
-                  android:layout_gravity="right"/>
-
-        <TextView android:id="@+id/ball_percent_value"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:hint="@string/ball_percent_value"
-                  android:layout_gravity="center" />
+                  android:hint="@string/total_cnt"
+                  android:paddingLeft="5dip"
+                  android:textStyle="bold"
+                  android:textSize="11pt"/>
     </TableRow>
 </TableLayout>

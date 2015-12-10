@@ -2,32 +2,35 @@
     <string name="app_name">Pitch Counter</string>
     <string name="action_settings">Settings</string>
 
-    <string name="good_ball_str">Good Balls:</string>
+    <string name="good_ball_str">Good Balls</string>
     <string name="good_ball_cnt">0</string>
     <string name="good_ball_add">+</string>
     <string name="good_ball_sub">-</string>
 
     <string name="bad_ball_cnt">0</string>
-    <string name="bad_ball_str">Bad Balls:</string>
+    <string name="bad_ball_str">Bad Balls</string>
     <string name="bad_ball_add">+</string>
     <string name="bad_ball_sub">-</string>
 
-    <string name="strike_str">Strikes:</string>
+    <string name="strike_str">Strikes</string>
     <string name="strike_cnt">0</string>
     <string name="strike_add">+</string>
     <string name="strike_sub">-</string>
 
-    <string name="total_cnt_str">Total Pitches:</string>
+    <string name="total_cnt_str">Pitch Count:</string>
     <string name="total_cnt">0</string>
 
     <string name="strike_percent_str">Strike %:</string>
     <string name="strike_percent_value">0</string>
 
-    <string name="good_strike_percent_str">Strike + Good %:</string>
+    <string name="good_strike_percent_str">Stk + Gd %:</string>
     <string name="good_strike_percent_value">0</string>
 
     <string name="ball_percent_str">Bad Ball %:</string>
     <string name="ball_percent_value">0</string>
+
+    <string name="good_percent_str">Good Ball %:</string>
+    <string name="good_percent_value">0</string>
 
     <string name="title_activity_display_message">My Message</string>
 </resources>
