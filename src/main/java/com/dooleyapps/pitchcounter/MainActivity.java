@@ -39,9 +39,33 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //  setSupportActionBar(toolbar);
+
+
+        if(savedInstanceState != null){
+            bCnt = savedInstanceState.getDouble("bCnt");
+            gCnt = savedInstanceState.getDouble("gCnt");
+            sCnt = savedInstanceState.getDouble("sCnt");
+            tCnt = savedInstanceState.getDouble("tCnt");
+            sPercent = savedInstanceState.getDouble("sPercent");
+            gPercent = savedInstanceState.getDouble("gPercent");
+            sgPercent = savedInstanceState.getDouble("sgPercent");
+            bPercent = savedInstanceState.getDouble("bPercent");
+
+            setContentView(R.layout.activity_main);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putDouble("bCnt",bCnt);
+        savedInstanceState.putDouble("gCnt",gCnt);
+        savedInstanceState.putDouble("sCnt",sCnt);
+        savedInstanceState.putDouble("tCnt",tCnt);
+        savedInstanceState.putDouble("sPercent",sPercent);
+        savedInstanceState.putDouble("gPercent",gPercent);
+        savedInstanceState.putDouble("sgPercent",sgPercent);
+        savedInstanceState.putDouble("bPercent",bPercent);
     }
 
     @Override
