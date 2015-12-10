@@ -74,10 +74,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void subBad(View view) {
-        bCnt = bCnt - 1;
-        mBadText = (TextView) findViewById(R.id.bad_ball_cnt);
-        mBadText.setText(String.format("%1$,.0f", bCnt));
-        totalCount();
+        if(bCnt > 0) {
+            bCnt = bCnt - 1;
+            mBadText = (TextView) findViewById(R.id.bad_ball_cnt);
+            mBadText.setText(String.format("%1$,.0f", bCnt));
+            totalCount();
+        }
     }
 
     public void addGood(View view) {
@@ -88,10 +90,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void subGood(View view) {
-        gCnt = gCnt - 1;
-        mGoodText = (TextView) findViewById(R.id.good_ball_cnt);
-        mGoodText.setText(String.format("%1$,.0f", gCnt));
-        totalCount();
+        if(gCnt > 0){
+            gCnt = gCnt - 1;
+            mGoodText = (TextView) findViewById(R.id.good_ball_cnt);
+            mGoodText.setText(String.format("%1$,.0f", gCnt));
+            totalCount();
+        }
     }
 
     public void addStrike(View view) {
@@ -102,10 +106,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void subStrike(View view) {
-        sCnt = sCnt - 1;
-        mStrikeText = (TextView) findViewById(R.id.strike_cnt);
-        mStrikeText.setText(String.format("%1$,.0f", sCnt));
-        totalCount();
+        if(sCnt > 0){
+            sCnt = sCnt - 1;
+            mStrikeText = (TextView) findViewById(R.id.strike_cnt);
+            mStrikeText.setText(String.format("%1$,.0f", sCnt));
+            totalCount();
+        }
     }
 
     private void totalCount(){

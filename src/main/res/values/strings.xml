@@ -32,5 +32,4 @@
     <string name="good_percent_str">Good Ball %:</string>
     <string name="good_percent_value">0</string>
 
-    <string name="title_activity_display_message">My Message</string>
 </resources>
