@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         Firebase.setAndroidContext(this);
 
@@ -62,12 +63,20 @@ public class MainActivity extends AppCompatActivity {
             gPercent = savedInstanceState.getDouble("gPercent");
             sgPercent = savedInstanceState.getDouble("sgPercent");
             bPercent = savedInstanceState.getDouble("bPercent");
-
-            setContentView(R.layout.activity_main);
         }
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        mStrikeText = (TextView) findViewById(R.id.strike_cnt);
+        mBadText = (TextView) findViewById(R.id.bad_ball_cnt);
+        mGoodText = (TextView) findViewById(R.id.good_ball_cnt);
+        mTotalText = (TextView) findViewById(R.id.total_cnt);
+        mStrikePercent = (TextView) findViewById(R.id.strike_percent_value);
+        mGoodPercent = (TextView) findViewById(R.id.good_percent_value);
+        mBallPercent = (TextView) findViewById(R.id.ball_percent_value);
+        mStrikeGoodPercent = (TextView) findViewById(R.id.good_strike_percent_value);
+        paintScreen();
     }
 
     @Override
@@ -107,72 +116,57 @@ public class MainActivity extends AppCompatActivity {
 
     public void addBad(View view) {
         bCnt = bCnt + 1;
-        mBadText = (TextView) findViewById(R.id.bad_ball_cnt);
-        mBadText.setText(String.format("%1$,.0f", bCnt));
-        totalCount();
+        paintScreen();
     }
 
     public void subBad(View view) {
         if (bCnt > 0) {
             bCnt = bCnt - 1;
-            mBadText = (TextView) findViewById(R.id.bad_ball_cnt);
-            mBadText.setText(String.format("%1$,.0f", bCnt));
-            totalCount();
+            paintScreen();
         }
     }
 
     public void addGood(View view) {
         gCnt = gCnt + 1;
-        mGoodText = (TextView) findViewById(R.id.good_ball_cnt);
-        mGoodText.setText(String.format("%1$,.0f", gCnt));
-        totalCount();
+        paintScreen();
     }
 
     public void subGood(View view) {
         if (gCnt > 0) {
             gCnt = gCnt - 1;
-            mGoodText = (TextView) findViewById(R.id.good_ball_cnt);
-            mGoodText.setText(String.format("%1$,.0f", gCnt));
-            totalCount();
+            paintScreen();
         }
     }
 
     public void addStrike(View view) {
         sCnt = sCnt + 1;
-        mStrikeText = (TextView) findViewById(R.id.strike_cnt);
-        mStrikeText.setText(String.format("%1$,.0f", sCnt));
-        totalCount();
+        paintScreen();
     }
 
     public void subStrike(View view) {
         if (sCnt > 0) {
             sCnt = sCnt - 1;
-            mStrikeText = (TextView) findViewById(R.id.strike_cnt);
-            mStrikeText.setText(String.format("%1$,.0f", sCnt));
-            totalCount();
+            paintScreen();
         }
     }
 
+    private void paintScreen(){
+        totalCount();
+        mStrikeText.setText(String.format("%1$,.0f", sCnt));
+        mBadText.setText(String.format("%1$,.0f", bCnt));
+        mGoodText.setText(String.format("%1$,.0f", gCnt));
+        mTotalText.setText(String.format("%1$,.0f", tCnt));
+        mStrikePercent.setText(String.format("%1$,.0f", sPercent));
+        mStrikeGoodPercent.setText(String.format("%1$,.0f", sgPercent));
+        mBallPercent.setText(String.format("%1$,.0f", bPercent));
+        mGoodPercent.setText(String.format("%1$,.0f", gPercent));
+    }
     private void totalCount() {
         tCnt = sCnt + bCnt + gCnt;
-        mTotalText = (TextView) findViewById(R.id.total_cnt);
-        mTotalText.setText(String.format("%1$,.0f", tCnt));
-
         sPercent = (sCnt / tCnt) * 100;
-        mStrikePercent = (TextView) findViewById(R.id.strike_percent_value);
-        mStrikePercent.setText(String.format("%1$,.0f", sPercent));
-
         sgPercent = ((sCnt + gCnt) / tCnt) * 100;
-        mStrikeGoodPercent = (TextView) findViewById(R.id.good_strike_percent_value);
-        mStrikeGoodPercent.setText(String.format("%1$,.0f", sgPercent));
-
         bPercent = (bCnt / tCnt) * 100;
-        mBallPercent = (TextView) findViewById(R.id.ball_percent_value);
-        mBallPercent.setText(String.format("%1$,.0f", bPercent));
-
         gPercent = (gCnt / tCnt) * 100;
-        mGoodPercent = (TextView) findViewById(R.id.good_percent_value);
-        mGoodPercent.setText(String.format("%1$,.0f", gPercent));
     }
 
     @Override
