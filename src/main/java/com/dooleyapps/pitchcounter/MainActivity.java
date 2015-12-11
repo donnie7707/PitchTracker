@@ -1,5 +1,6 @@
 package com.dooleyapps.pitchcounter;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,11 @@ import android.view.MenuItem;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.firebase.client.Firebase;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.w3c.dom.Text;
 
@@ -34,14 +40,20 @@ public class MainActivity extends AppCompatActivity {
     private TextView mStrikeGoodPercent;
     private TextView mBallPercent;
     private TextView mGoodPercent;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Firebase.setAndroidContext(this);
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             bCnt = savedInstanceState.getDouble("bCnt");
             gCnt = savedInstanceState.getDouble("gCnt");
             sCnt = savedInstanceState.getDouble("sCnt");
@@ -53,19 +65,22 @@ public class MainActivity extends AppCompatActivity {
 
             setContentView(R.layout.activity_main);
         }
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState){
+    public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putDouble("bCnt",bCnt);
-        savedInstanceState.putDouble("gCnt",gCnt);
-        savedInstanceState.putDouble("sCnt",sCnt);
-        savedInstanceState.putDouble("tCnt",tCnt);
-        savedInstanceState.putDouble("sPercent",sPercent);
-        savedInstanceState.putDouble("gPercent",gPercent);
-        savedInstanceState.putDouble("sgPercent",sgPercent);
-        savedInstanceState.putDouble("bPercent",bPercent);
+        savedInstanceState.putDouble("bCnt", bCnt);
+        savedInstanceState.putDouble("gCnt", gCnt);
+        savedInstanceState.putDouble("sCnt", sCnt);
+        savedInstanceState.putDouble("tCnt", tCnt);
+        savedInstanceState.putDouble("sPercent", sPercent);
+        savedInstanceState.putDouble("gPercent", gPercent);
+        savedInstanceState.putDouble("sgPercent", sgPercent);
+        savedInstanceState.putDouble("bPercent", bPercent);
     }
 
     @Override
@@ -98,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void subBad(View view) {
-        if(bCnt > 0) {
+        if (bCnt > 0) {
             bCnt = bCnt - 1;
             mBadText = (TextView) findViewById(R.id.bad_ball_cnt);
             mBadText.setText(String.format("%1$,.0f", bCnt));
@@ -114,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void subGood(View view) {
-        if(gCnt > 0){
+        if (gCnt > 0) {
             gCnt = gCnt - 1;
             mGoodText = (TextView) findViewById(R.id.good_ball_cnt);
             mGoodText.setText(String.format("%1$,.0f", gCnt));
@@ -130,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void subStrike(View view) {
-        if(sCnt > 0){
+        if (sCnt > 0) {
             sCnt = sCnt - 1;
             mStrikeText = (TextView) findViewById(R.id.strike_cnt);
             mStrikeText.setText(String.format("%1$,.0f", sCnt));
@@ -138,8 +153,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void totalCount(){
-        tCnt = sCnt+bCnt+gCnt;
+    private void totalCount() {
+        tCnt = sCnt + bCnt + gCnt;
         mTotalText = (TextView) findViewById(R.id.total_cnt);
         mTotalText.setText(String.format("%1$,.0f", tCnt));
 
@@ -147,16 +162,56 @@ public class MainActivity extends AppCompatActivity {
         mStrikePercent = (TextView) findViewById(R.id.strike_percent_value);
         mStrikePercent.setText(String.format("%1$,.0f", sPercent));
 
-        sgPercent = ((sCnt + gCnt)/tCnt) * 100;
+        sgPercent = ((sCnt + gCnt) / tCnt) * 100;
         mStrikeGoodPercent = (TextView) findViewById(R.id.good_strike_percent_value);
         mStrikeGoodPercent.setText(String.format("%1$,.0f", sgPercent));
 
-        bPercent = (bCnt/tCnt) * 100;
+        bPercent = (bCnt / tCnt) * 100;
         mBallPercent = (TextView) findViewById(R.id.ball_percent_value);
         mBallPercent.setText(String.format("%1$,.0f", bPercent));
 
-        gPercent = (gCnt/tCnt) * 100;
+        gPercent = (gCnt / tCnt) * 100;
         mGoodPercent = (TextView) findViewById(R.id.good_percent_value);
         mGoodPercent.setText(String.format("%1$,.0f", gPercent));
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.dooleyapps.pitchcounter/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.dooleyapps.pitchcounter/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
     }
 }
