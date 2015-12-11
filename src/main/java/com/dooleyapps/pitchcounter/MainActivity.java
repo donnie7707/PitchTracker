@@ -13,12 +13,18 @@ import android.content.Intent;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.Query;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.w3c.dom.Text;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,24 +52,38 @@ public class MainActivity extends AppCompatActivity {
      */
     private GoogleApiClient client;
 
+    private DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");;
+    private DateFormat dateFormatLong = new SimpleDateFormat("yyyyMMddHHmmssSS");
+    private Date date;
+    private Date sessionStartDate;
+
+    private Firebase fbData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Firebase.setAndroidContext(this);
 
+        sessionStartDate = new Date();
+
+        Firebase.setAndroidContext(this);
+        fbData = new Firebase("https://pitchtracker.firebaseio.com/");
+
+       // DataSnapshot fbChild = fbData.child(dateFormat.format(sessionStartDate);
+
+       // fbChild.g
+
+        //Query queryRef = fbData.orderByChild("height").equalTo(25);
+
+     //   /*
         if (savedInstanceState != null) {
             bCnt = savedInstanceState.getDouble("bCnt");
             gCnt = savedInstanceState.getDouble("gCnt");
             sCnt = savedInstanceState.getDouble("sCnt");
-            tCnt = savedInstanceState.getDouble("tCnt");
-            sPercent = savedInstanceState.getDouble("sPercent");
-            gPercent = savedInstanceState.getDouble("gPercent");
-            sgPercent = savedInstanceState.getDouble("sgPercent");
-            bPercent = savedInstanceState.getDouble("bPercent");
         }
+     //   */
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -78,20 +98,15 @@ public class MainActivity extends AppCompatActivity {
         mStrikeGoodPercent = (TextView) findViewById(R.id.good_strike_percent_value);
         paintScreen();
     }
-
+//  /*
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putDouble("bCnt", bCnt);
         savedInstanceState.putDouble("gCnt", gCnt);
         savedInstanceState.putDouble("sCnt", sCnt);
-        savedInstanceState.putDouble("tCnt", tCnt);
-        savedInstanceState.putDouble("sPercent", sPercent);
-        savedInstanceState.putDouble("gPercent", gPercent);
-        savedInstanceState.putDouble("sgPercent", sgPercent);
-        savedInstanceState.putDouble("bPercent", bPercent);
     }
-
+//  */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -116,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void addBad(View view) {
         bCnt = bCnt + 1;
+        date = new Date();
+        fbData.child(dateFormat.format(sessionStartDate)).child("z").child(dateFormatLong.format(date)).child("pitch").setValue("B");
         paintScreen();
     }
 
@@ -128,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void addGood(View view) {
         gCnt = gCnt + 1;
+        date = new Date();
+        fbData.child(dateFormat.format(sessionStartDate)).child("z").child(dateFormatLong.format(date)).child("pitch").setValue("G");
         paintScreen();
     }
 
@@ -140,6 +159,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void addStrike(View view) {
         sCnt = sCnt + 1;
+        date = new Date();
+
+        fbData.child(dateFormat.format(sessionStartDate)).child("z").child(dateFormatLong.format(date)).child("pitch").setValue("S");
         paintScreen();
     }
 
@@ -160,6 +182,15 @@ public class MainActivity extends AppCompatActivity {
         mStrikeGoodPercent.setText(String.format("%1$,.0f", sgPercent));
         mBallPercent.setText(String.format("%1$,.0f", bPercent));
         mGoodPercent.setText(String.format("%1$,.0f", gPercent));
+
+        //Add in the total session counts to Firebase
+        //fbData.child("session").setValue(dateFormat.format(sessionStartDate));
+        //fbData.child("session").child("strikeCount").setValue(sCnt);
+
+        fbData.child(dateFormat.format(sessionStartDate)).child("strikeCount").setValue(sCnt);
+        fbData.child(dateFormat.format(sessionStartDate)).child("ballCount").setValue(bCnt);
+        fbData.child(dateFormat.format(sessionStartDate)).child("goodCount").setValue(gCnt);
+
     }
     private void totalCount() {
         tCnt = sCnt + bCnt + gCnt;
